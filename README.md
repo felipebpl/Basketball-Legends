@@ -8,7 +8,7 @@ Agradeçemos pelo projeto e pela assistencia durante seu desenvolvimento dos pro
 ## Membros da equipe: ##
  Bruno Canepa Tosi 
 / Felipe Lemos / 
-Lourenço Azevedo de Paula
+Lourenço Azevedo de Paula 
 
 ## Música: ##
 LSD - Audio (Official Video) ft. Sia, Diplo, Labrinth
