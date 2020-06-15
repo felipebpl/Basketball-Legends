@@ -6,7 +6,7 @@ Pressione ENTER para começar o jogo. Clique no espaço ou nas seta de cima do t
 Agradeçemos pelo projeto e pela assistencia durante seu desenvolvimento dos professores Andrew Toshi e Antonio Selvatici
 
 ## Membros da equipe: ##
-/ Bruno Canepa Tosi /
+ Bruno Canepa Tosi 
 / Felipe Lemos / 
 Lourenco Azevedo
 
