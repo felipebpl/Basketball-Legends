@@ -56,3 +56,27 @@ class Ball(pygame.sprite.Sprite):
 
     def jump(self):
         self.velocidade = -velocidade
+        
+#definindo a calsse dos canos/cesta
+class Cesta(pygame.sprite.Sprite):
+
+    def __init__(self, inverted,posicao_x,tamanho):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = pygame.image.load('./assets/images/cesta.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image,(cesta_width,cesta_height))
+        
+        self.rect = self.image.get_rect()
+        self.rect[0] = posicao_x
+        
+        #canos invertidos
+        if inverted:
+            self.image = pygame.transform.flip(self.image, False, True)
+            self.rect[1] = - (self.rect[3] - tamanho)
+        else:
+            self.rect[1] = height - tamanho
+        
+        self.mask = pygame.mask.from_surface(self.image)
+
+    def update(self):
+        self.rect[0] -= velocidade_jogo
