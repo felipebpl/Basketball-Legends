@@ -190,3 +190,36 @@ while window_open :
                 game_over = False
                 score = 0
                 ball.rect[1] = 0
+                
+#movendo backgrounds
+    posicao_fundo = x % backgrounds[i].get_rect().width
+
+    window.blit(backgrounds[i], (posicao_fundo - backgrounds[i].get_rect().width, 0))
+
+    if posicao_fundo < width:
+        window.blit(backgrounds[(i+1) % len(backgrounds)], (posicao_fundo,0))
+#game loop
+    if game_over:
+         # GAMEOVER sombreado
+        txt_gameover2 = titlefont.render("Game Over", 1, (255,60,0))
+        window.blit(txt_gameover2, (245, 200))
+        
+        # GAMEOVER principal
+        txt_gameover1 = titlefont.render("Game Over", 1, (255,255,255))
+        window.blit(txt_gameover1, (240, 195))
+        
+        #Formantando a pontuação
+        txt_score = textfont.render("Final Score: {0}".format(score), 1, (255,255,0))
+        window.blit(txt_score, (245, 230))
+        
+        
+    elif title_screen:
+            
+        # START sombreado
+        txt_title_sombra = titlefont.render("Basketball Legends", 1, (255,60,0))
+        window.blit(txt_title_sombra, (165, 25))
+        
+        #START principal
+        txt_title = titlefont.render("Basketball Legends", 1, (255,255,255))
+        window.blit(txt_title, (160, 20))
+                
