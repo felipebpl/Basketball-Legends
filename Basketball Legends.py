@@ -222,4 +222,46 @@ while window_open :
         #START principal
         txt_title = titlefont.render("Basketball Legends", 1, (255,255,255))
         window.blit(txt_title, (160, 20))
+        
+        animacao_frame = animacao_frame + 1
+        
+        if animacao_frame <= 15:
+            press_start = textfont.render("Press ENTER to START", 1, (255,255,255))
+            window.blit(press_start, (160, 380))
+            
+        if animacao_frame > 20:
+            animacao_frame = 0
+            
+    else:
+
+        # Definindo a dificuldade
+        if score < 4: 
+           velocidade_jogo = 3
+           gravity = 1
+           gap = 180
+           
+        if score > 4:
+           velocidade_jogo = 4.5
+           gravity = 1.1
+           gap = 150
+           
+        if score > 10:
+           velocidade_jogo = 6
+           gravity = 1.2
+           gap = 140
+           
+        if score > 14:
+           velocidade_jogo = 9
+           gravity = 1.3
+           gap = 115
+           
+        if score > 21:
+           velocidade_jogo = 13
+           gravity = 1.4
+           gap = 99
+           
+        if score > 28:
+           velocidade_jogo = 14
+           gravity = 1.4
+           gap = 90
                 
