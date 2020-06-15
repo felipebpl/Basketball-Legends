@@ -166,3 +166,27 @@ ball_bounce = pygame.mixer.Sound('./assets/sounds/bounce.wav')
 coin_sound = pygame.mixer.Sound('./assets/sounds/coin_sound.wav')
 music = pygame.mixer.music.load('./assets/sounds/soundtrack.mp3')
 pygame.mixer.music.play(-1)
+window_open = True
+
+#rotina/loop  eventos
+while window_open :
+
+    for event in pygame.event.get():
+        
+        if event.type == pygame.QUIT:
+            window_open = False
+
+        if event.type == pygame.KEYDOWN:
+            
+            if event.key == pygame.K_RETURN:
+                title_screen = False
+                
+            if not game_over and event.key == pygame.K_SPACE or event.key == pygame.K_UP:
+                ball_bounce.play()
+                ball.jump()
+
+            if game_over and event.key == pygame.K_RETURN:
+                title_screen = True
+                game_over = False
+                score = 0
+                ball.rect[1] = 0
