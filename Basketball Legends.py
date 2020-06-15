@@ -264,4 +264,50 @@ while window_open :
            velocidade_jogo = 14
            gravity = 1.4
            gap = 90
-                
+        x -= 2
+        
+        txt_score = textfont.render("Score {0}".format(score), 1, (255,255,0))
+        window.blit(txt_score, (5, 10))
+
+        if posicao_fundo == 0:
+            i = (i+1) % len(backgrounds)
+        
+        
+#removendo a sprites fora da tela
+        if fora_tela(cesta_group.sprites()[0]):
+            
+            cesta_group.remove(cesta_group.sprites()[0])
+            cesta_group.remove(cesta_group.sprites()[0])
+
+            cestas = cestas_aleatorias(width * 2)
+
+            cesta_group.add(cestas[0])
+            cesta_group.add(cestas[1])
+            
+#update dos grupos
+        ball_group.update()
+        cesta_group.update()
+        coin_group.update()
+        
+    
+#desenhando na tela
+        ball_group.draw(window)
+        cesta_group.draw(window)
+        coin_group.draw(window)
+        
+    pygame.display.update()
+#colisão bola cesta
+    if pygame.sprite.groupcollide(ball_group, cesta_group, False, False, pygame.sprite.collide_mask):
+        game_over = True
+        
+#colisão bola 'moeda'
+    if pygame.sprite.groupcollide(ball_group, coin_group, False, True, pygame.sprite.collide_rect):
+        score += 1
+        coin_sound.play()
+        
+    
+    
+    clock.tick(FPS)
+
+pygame.quit()
+
