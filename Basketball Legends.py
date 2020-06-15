@@ -80,6 +80,7 @@ class Cesta(pygame.sprite.Sprite):
 
     def update(self):
         self.rect[0] -= velocidade_jogo
+        
 #definindo a classe da moeda invisel para o colisão com o score       
 class Moeda(pygame.sprite.Sprite):
 
@@ -163,7 +164,6 @@ clock = pygame.time.Clock()
 
 #carregando os sons
 ball_bounce = pygame.mixer.Sound('./assets/sounds/bounce.wav')
-coin_sound = pygame.mixer.Sound('./assets/sounds/coin_sound.wav')
 music = pygame.mixer.music.load('./assets/sounds/soundtrack.mp3')
 pygame.mixer.music.play(-1)
 window_open = True
@@ -303,7 +303,7 @@ while window_open :
 #colisão bola 'moeda'
     if pygame.sprite.groupcollide(ball_group, coin_group, False, True, pygame.sprite.collide_rect):
         score += 1
-        coin_sound.play()
+        
         
     
     
