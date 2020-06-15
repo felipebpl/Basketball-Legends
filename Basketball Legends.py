@@ -164,6 +164,7 @@ clock = pygame.time.Clock()
 
 #carregando os sons
 ball_bounce = pygame.mixer.Sound('./assets/sounds/bounce.wav')
+over_sound = pygame.mixer.Sound('./assets/sounds/game_over_sound.wav')
 music = pygame.mixer.music.load('./assets/sounds/soundtrack.mp3')
 pygame.mixer.music.play(-1)
 window_open = True
@@ -298,6 +299,7 @@ while window_open :
     pygame.display.update()
 #colisão bola cesta
     if pygame.sprite.groupcollide(ball_group, cesta_group, False, False, pygame.sprite.collide_mask):
+        over_sound.play()
         game_over = True
         
 #colisão bola 'moeda'
