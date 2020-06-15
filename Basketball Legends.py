@@ -80,3 +80,34 @@ class Cesta(pygame.sprite.Sprite):
 
     def update(self):
         self.rect[0] -= velocidade_jogo
+#definindo a classe da moeda invisel para o colisão com o score       
+class Moeda(pygame.sprite.Sprite):
+
+    def __init__(self,xpos,ypos):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.image = pygame.image.load('./assets/images/moeda.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image,(coin_width,coin_height))
+        self.rect = self.image.get_rect()
+        self.rect.x = xpos
+        self.rect.y = ypos
+        
+        
+    def update(self):
+        self.rect[0] -= velocidade_jogo
+    
+        
+        
+# posicionando os canos e a moeda
+def cestas_aleatorias(posicao_x):
+    tam = random.randint(100,300)
+    ycoin = tam + gap/2
+    cesta = Cesta(False, posicao_x, tam)
+    cesta_invertida = Cesta(True, posicao_x, height - tam - gap)
+    moeda = Moeda(posicao_x,ycoin)
+    coin_group.add(moeda)
+    
+    return (cesta, cesta_invertida)
+
+def fora_tela(sprite):
+    return sprite.rect[0] < -(sprite.rect[2])
