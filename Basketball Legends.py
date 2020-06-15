@@ -111,3 +111,28 @@ def cestas_aleatorias(posicao_x):
 
 def fora_tela(sprite):
     return sprite.rect[0] < -(sprite.rect[2])
+
+pygame.init()
+pygame.font.init()
+
+#recebe as fontes e tamanho
+textfont = pygame.font.Font('./assets/fonts/Down_Hill.ttf', 30)
+titlefont = pygame.font.Font('./assets/fonts/Down_Hill.ttf', 38)
+
+# display screen
+window = pygame.display.set_mode((width, height))
+pygame.display.set_caption(titulo)
+
+#carrega todas os backrounds diferentes (ja estão na width e height certas)
+backgrounds = [pygame.image.load('./assets/images/background_intro.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_jordan.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_bird.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_kobe.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_magic.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_lebron.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_karim.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_shaq.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_pippen.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_rodman.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_curry.png').convert_alpha(),
+               pygame.image.load('./assets/images/background_end.png').convert_alpha()]
