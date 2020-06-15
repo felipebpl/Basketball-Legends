@@ -136,3 +136,33 @@ backgrounds = [pygame.image.load('./assets/images/background_intro.png').convert
                pygame.image.load('./assets/images/background_rodman.png').convert_alpha(),
                pygame.image.load('./assets/images/background_curry.png').convert_alpha(),
                pygame.image.load('./assets/images/background_end.png').convert_alpha()]
+
+#definindo os grupos
+coin_group = pygame.sprite.Group()
+
+ball_group = pygame.sprite.Group()
+ball = Ball()
+ball_group.add(ball)
+
+
+
+cesta_group = pygame.sprite.Group()
+
+#invertendo a cesta
+for a in range(2):
+    cestas = cestas_aleatorias(width * a + 700)
+    cesta_group.add(cestas[0])
+    cesta_group.add(cestas[1])
+
+#contadores
+i = 0
+k = 0
+x = 0
+
+clock = pygame.time.Clock()
+
+#carregando os sons
+ball_bounce = pygame.mixer.Sound('./assets/sounds/bounce.wav')
+coin_sound = pygame.mixer.Sound('./assets/sounds/coin_sound.wav')
+music = pygame.mixer.music.load('./assets/sounds/soundtrack.mp3')
+pygame.mixer.music.play(-1)
