@@ -265,6 +265,7 @@ while window_open :
            velocidade_jogo = 14
            gravity = 1.4
            gap = 90
+#game loop       
         x -= 2
         
         txt_score = textfont.render("Score {0}".format(score), 1, (255,255,0))
