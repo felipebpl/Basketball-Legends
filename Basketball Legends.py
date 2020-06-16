@@ -246,13 +246,13 @@ while window_open :
            gravity = 1.1
            gap = 150
            
-        if score > 10:
+        if score > 8:
            velocidade_jogo = 6
            gravity = 1.2
            gap = 140
            
-        if score > 14:
-           velocidade_jogo = 9
+        if score > 12:
+           velocidade_jogo = 8.5
            gravity = 1.3
            gap = 115
            
