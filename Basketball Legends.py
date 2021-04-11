@@ -38,6 +38,16 @@ telaTamanho = Tamanho(450,600)
 moedaTamanho = Tamanho(50,50)
 cestaTamanho = Tamanho(500,120)
 
+#Oportunidade de melhorar coesão : Extrair funções ou métodos para separar responsabilidades.
+def verifica_invertido(self, estado, tamanho_cano):
+    if estado == True:
+        self.image = pygame.transform.flip(self.image, False, True)
+        self.rect[1] = - (self.rect[3] - tamanho_cano)
+    else:
+        self.rect[1] = telaTamanho.altura - tamanho_cano
+
+    self.mask = pygame.mask.from_surface(self.image)
+
 
 
 
@@ -82,15 +92,15 @@ class Cesta(pygame.sprite.Sprite):
         
         self.rect = self.image.get_rect()
         self.rect[0] = posicao_x
-        
+
+        # Metodo Extraido para coesão
+        verifica_invertido(self, inverted, tamanho)        
         #canos invertidos
-        if inverted:
+    """ if inverted:
             self.image = pygame.transform.flip(self.image, False, True)
             self.rect[1] = - (self.rect[3] - tamanho)
         else:
-            self.rect[1] = telaTamanho.altura - tamanho
-        
-        self.mask = pygame.mask.from_surface(self.image)
+            self.rect[1] = telaTamanho.altura - tamanho"""
 
     def update(self):
         self.rect[0] -= velocidade_jogo
