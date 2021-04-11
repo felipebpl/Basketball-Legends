@@ -4,15 +4,16 @@ import random
 #título do jogo
 titulo = ' Basketball Legends '
 
+#dados agrupados em classe linha 32
 #valores
-width = 600
-height = 450
+#width = 600
+#height = 450
 
-cesta_width = 120
-cesta_height = 500
+#cesta_width = 120
+#cesta_height = 500
 
-coin_height = 50
-coin_width = 50
+#coin_height = 50
+#coin_width = 50
 
 gap = 120
 
@@ -26,6 +27,29 @@ velocidade_jogo = 3
 gravity = 1
 
 FPS = 30
+
+#Oportunidade de abstração : Criar uma classe para agrupar dados e ações.
+class Tamanho:
+    def __init__(self, altura, largura):
+        self.altura = altura
+        self.largura = largura
+
+telaTamanho = Tamanho(450,600)
+moedaTamanho = Tamanho(50,50)
+cestaTamanho = Tamanho(500,120)
+
+#Oportunidade de melhorar coesão : Extrair funções ou métodos para separar responsabilidades.
+def verifica_invertido(self, estado, tamanho_cano):
+    if estado == True:
+        self.image = pygame.transform.flip(self.image, False, True)
+        self.rect[1] = - (self.rect[3] - tamanho_cano)
+    else:
+        self.rect[1] = telaTamanho.altura - tamanho_cano
+
+    self.mask = pygame.mask.from_surface(self.image)
+
+
+
 
 #definindo o movimento da bola e das asas
 class Ball(pygame.sprite.Sprite):
@@ -45,8 +69,8 @@ class Ball(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
         self.rect = self.image.get_rect()
-        self.rect[0] = width / 150
-        self.rect[1] = height / 40
+        self.rect[0] = telaTamanho.largura / 150
+        self.rect[1] = telaTamanho.altura / 40
 
     def update(self):
         self.bola_atual = (self.bola_atual + 1) % 3
@@ -64,19 +88,19 @@ class Cesta(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load('./assets/images/cesta.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image,(cesta_width,cesta_height))
+        self.image = pygame.transform.scale(self.image,(cestaTamanho.largura,cestaTamanho.altura))
         
         self.rect = self.image.get_rect()
         self.rect[0] = posicao_x
-        
+
+        # Metodo Extraido para coesão
+        verifica_invertido(self, inverted, tamanho)        
         #canos invertidos
-        if inverted:
+    """ if inverted:
             self.image = pygame.transform.flip(self.image, False, True)
             self.rect[1] = - (self.rect[3] - tamanho)
         else:
-            self.rect[1] = height - tamanho
-        
-        self.mask = pygame.mask.from_surface(self.image)
+            self.rect[1] = telaTamanho.altura - tamanho"""
 
     def update(self):
         self.rect[0] -= velocidade_jogo
@@ -88,7 +112,7 @@ class Moeda(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         self.image = pygame.image.load('./assets/images/moeda.png').convert_alpha()
-        self.image = pygame.transform.scale(self.image,(coin_width,coin_height))
+        self.image = pygame.transform.scale(self.image,(moedaTamanho.largura,moedaTamanho.altura))
         self.rect = self.image.get_rect()
         self.rect.x = xpos
         self.rect.y = ypos
@@ -104,7 +128,7 @@ def cestas_aleatorias(posicao_x):
     tam = random.randint(100,300)
     ycoin = tam + gap/2
     cesta = Cesta(False, posicao_x, tam)
-    cesta_invertida = Cesta(True, posicao_x, height - tam - gap)
+    cesta_invertida = Cesta(True, posicao_x, telaTamanho.altura - tam - gap)
     moeda = Moeda(posicao_x,ycoin)
     coin_group.add(moeda)
     
@@ -121,7 +145,7 @@ textfont = pygame.font.Font('./assets/fonts/Down_Hill.ttf', 30)
 titlefont = pygame.font.Font('./assets/fonts/Down_Hill.ttf', 38)
 
 # display screen
-window = pygame.display.set_mode((width, height))
+window = pygame.display.set_mode((telaTamanho.largura, telaTamanho.altura))
 pygame.display.set_caption(titulo)
 
 #carrega todas os backrounds diferentes (ja estão na width e height certas)
@@ -151,7 +175,7 @@ cesta_group = pygame.sprite.Group()
 
 #invertendo a cesta
 for a in range(2):
-    cestas = cestas_aleatorias(width * a + 700)
+    cestas = cestas_aleatorias(telaTamanho.largura * a + 700)
     cesta_group.add(cestas[0])
     cesta_group.add(cestas[1])
 
@@ -197,7 +221,7 @@ while window_open :
 
     window.blit(backgrounds[i], (posicao_fundo - backgrounds[i].get_rect().width, 0))
 
-    if posicao_fundo < width:
+    if posicao_fundo < telaTamanho.largura:
         window.blit(backgrounds[(i+1) % len(backgrounds)], (posicao_fundo,0))
 #game loop
     if game_over:
@@ -281,7 +305,7 @@ while window_open :
             cesta_group.remove(cesta_group.sprites()[0])
             cesta_group.remove(cesta_group.sprites()[0])
 
-            cestas = cestas_aleatorias(width * 2)
+            cestas = cestas_aleatorias(telaTamanho.largura * 2)
 
             cesta_group.add(cestas[0])
             cesta_group.add(cestas[1])
